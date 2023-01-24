@@ -39,9 +39,9 @@ const HeroesAddForm = () => {
         }
 
         request("http://localhost:3001/heroes", "POST", JSON.stringify(newHero))
-        .then(res => console.log(res, 'Відправка успішна'))
+        .then(res => console.log(res, 'Sending is successful'))
         .then(dispatch(heroCreated(newHero)))
-        .catch(err => console.log('Щось пішло не так :('))
+        .catch(err => console.log('Something went wrong :('))
 
         setHeroName('')
         setHeroDescr('')
@@ -50,9 +50,9 @@ const HeroesAddForm = () => {
 
     const renderFilters = (filters, status) => {
         if (status === "loading") {
-            return <option>Загрузка елементів</option>
+            return <option>Loading elements</option>
         } else if (status === "error") {
-            return <option>Помилка загрузки</option>
+            return <option>Loading error</option>
         }
         
         //якщо фільтри є, то рендеримо їх
@@ -68,33 +68,33 @@ const HeroesAddForm = () => {
     return (
         <form className="border p-4 shadow-lg rounded" onSubmit={onSubmitHandler}>
             <div className="mb-3">
-                <label htmlFor="name" className="form-label fs-4">Имя нового героя</label>
+                <label htmlFor="name" className="form-label fs-4">Name of the new hero</label>
                 <input 
                     required
                     type="text" 
                     name="name" 
                     className="form-control" 
                     id="name" 
-                    placeholder="Как меня зовут?"
+                    placeholder="What's my name?"
                     value={heroName}
                     onChange={(e) => setHeroName(e.target.value)}/>
             </div>
 
             <div className="mb-3">
-                <label htmlFor="text" className="form-label fs-4">Описание</label>
+                <label htmlFor="text" className="form-label fs-4">Description</label>
                 <textarea
                     required
                     name="text" 
                     className="form-control" 
                     id="text" 
-                    placeholder="Что я умею?"
+                    placeholder="What can I do?"
                     style={{"height": '130px'}}
                     value={heroDescr}
                     onChange={(e) => setHeroDescr(e.target.value)}/>
             </div>
 
             <div className="mb-3">
-                <label htmlFor="element" className="form-label">Выбрать элемент героя</label>
+                <label htmlFor="element" className="form-label">Choose a hero element</label>
                 <select 
                     required
                     className="form-select" 
@@ -102,7 +102,7 @@ const HeroesAddForm = () => {
                     name="element"
                     value={heroElement}
                     onChange={(e) => setHeroElement(e.target.value)}>
-                    <option >Я владею элементом...</option>
+                    <option >I own the element...</option>
 {/*                     <option value="fire">Огонь</option>
                     <option value="water">Вода</option>
                     <option value="wind">Ветер</option>
@@ -111,7 +111,7 @@ const HeroesAddForm = () => {
                 </select>
             </div>
 
-            <button type="submit" className="btn btn-primary">Создать</button>
+            <button type="submit" className="btn btn-primary">Create</button>
         </form>
     )
 }
